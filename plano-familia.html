@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Treino e Nutrição — Família Kerber</title>
+<style>
+  :root{
+    --bg:#1B1815;
+    --paper:#252119;
+    --paper-2:#2D2820;
+    --ink:#EDE5D6;
+    --muted:#A89C8C;
+    --brick:#E08A6C;
+    --olive:#9CAE7C;
+    --sage:#33392B;
+    --gold:#E0BD6E;
+    --line:#3A352D;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Source Sans 3','Segoe UI',sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces','Georgia',serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding:0 28px 100px;
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:70px 0 50px;
+    text-align:center;
+    position:relative;
+  }
+
+  .eyebrow{
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--brick);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+
+  header.hero h1{
+    font-size:3.1rem;
+    line-height:1.08;
+    margin-bottom:14px;
+  }
+
+  header.hero h1 em{
+    font-style:italic;
+    color:var(--brick);
+  }
+
+  .subtitle{
+    max-width:580px;
+    margin:0 auto;
+    color:var(--muted);
+    font-size:1.08rem;
+  }
+
+  .divider{
+    width:64px;
+    height:3px;
+    background:var(--gold);
+    margin:36px auto 0;
+    border-radius:2px;
+  }
+
+  /* ---------- NOTICE ---------- */
+  .notice{
+    background:var(--sage);
+    border:1px solid #454c38;
+    border-radius:14px;
+    padding:24px 28px;
+    margin:40px 0 60px;
+    font-size:0.97rem;
+  }
+  .notice strong{color:var(--olive);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    margin:70px 0 28px;
+  }
+  .section-head .num{
+    font-family:'Fraunces',serif;
+    font-size:2.6rem;
+    color:var(--gold);
+    font-weight:600;
+    line-height:1;
+  }
+  .section-head h2{
+    font-size:1.9rem;
+  }
+  .section-head .line{
+    flex:1;
+    height:1px;
+    background:var(--line);
+    align-self:center;
+  }
+
+  .lead{margin-bottom:28px;color:var(--muted);}
+
+  /* ---------- WORKOUT CARDS ---------- */
+  .days-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+  }
+  @media(max-width:680px){ .days-grid{grid-template-columns:1fr;} }
+
+  .day-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px 26px;
+    position:relative;
+    overflow:hidden;
+  }
+  .day-card::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;
+    width:6px;height:100%;
+    background:var(--brick);
+  }
+  .day-card.cardio::before{background:var(--olive);}
+
+  .day-tag{
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--brick);
+    margin-bottom:6px;
+  }
+  .day-card.cardio .day-tag{color:var(--olive);}
+
+  .day-card h3{
+    font-size:1.35rem;
+    margin-bottom:14px;
+  }
+
+  .day-card ul{
+    list-style:none;
+    padding:0;
+  }
+  .day-card li{
+    padding:7px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:0.96rem;
+  }
+  .day-card li:last-child{border-bottom:none;}
+  .day-card li::before{
+    content:"·";
+    color:var(--gold);
+    font-weight:900;
+    margin-right:10px;
+  }
+
+  .progress-note{
+    margin-top:28px;
+    background:var(--sage);
+    border-radius:14px;
+    padding:20px 24px;
+    font-size:0.96rem;
+  }
+  .progress-note strong{color:var(--olive);}
+
+  /* ---------- TABLE ---------- */
+  .table-wrap{
+    overflow-x:auto;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:6px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.95rem;
+  }
+  th,td{
+    text-align:left;
+    padding:16px 18px;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--brick);
+    font-size:1.02rem;
+    background:var(--sage);
+  }
+  th:first-child, td:first-child{
+    font-weight:600;
+    color:var(--olive);
+  }
+  tr:last-child td{border-bottom:none;}
+  th:first-child{border-radius:12px 0 0 0;}
+  th:last-child{border-radius:0 12px 0 0;}
+
+  /* ---------- MENU CARDS ---------- */
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+  }
+  @media(max-width:680px){ .menu-grid{grid-template-columns:1fr;} }
+
+  .meal-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:24px;
+  }
+  .meal-card h3{
+    font-size:1.15rem;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .meal-card h3 .dot{
+    width:10px;height:10px;
+    border-radius:50%;
+    background:var(--gold);
+    display:inline-block;
+  }
+  .meal-card p{
+    font-size:0.94rem;
+    margin-bottom:6px;
+    color:var(--ink);
+  }
+  .meal-card .note{
+    font-size:0.86rem;
+    color:var(--muted);
+  }
+  .meal-card .tag{
+    display:inline-block;
+    font-size:0.78rem;
+    font-weight:700;
+    color:var(--brick);
+    background:#3a2c25;
+    border-radius:8px;
+    padding:2px 9px;
+    margin-top:8px;
+  }
+
+  /* ---------- CHEAT DAY ---------- */
+  .cheat{
+    background:linear-gradient(135deg,#7a3a28,#4f2419);
+    color:var(--ink);
+    border:1px solid #5c2f21;
+    border-radius:20px;
+    padding:40px 36px;
+    text-align:center;
+  }
+  .cheat h2{color:var(--ink);font-size:2rem;margin-bottom:10px;}
+  .cheat p{max-width:580px;margin:0 auto 6px;opacity:0.92;font-size:1rem;}
+  .cheat .pizza-icon{
+    font-size:2.6rem;
+    margin-bottom:14px;
+    display:block;
+  }
+
+  /* ---------- LIST / TIPS ---------- */
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+  }
+  @media(max-width:680px){ .two-col{grid-template-columns:1fr;} }
+
+  .pill-list{
+    list-style:none;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+  @media(max-width:480px){ .pill-list{grid-template-columns:1fr;} }
+  .pill-list li{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:0.92rem;
+  }
+
+  .tips-list{
+    list-style:none;
+    padding:0;
+  }
+  .tips-list li{
+    padding:14px 0 14px 30px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    font-size:0.97rem;
+  }
+  .tips-list li:last-child{border-bottom:none;}
+  .tips-list li::before{
+    content:"✓";
+    position:absolute;
+    left:0;
+    color:var(--olive);
+    font-weight:900;
+  }
+
+  /* ---------- SUBSIDY ---------- */
+  .subsidy{
+    background:var(--sage);
+    border-radius:18px;
+    padding:32px;
+  }
+  .subsidy h2{margin-bottom:10px;}
+  .subsidy ol{
+    margin:18px 0 0 22px;
+  }
+  .subsidy li{margin-bottom:8px;font-size:0.97rem;}
+  .subsidy a{color:var(--brick);font-weight:700;text-decoration:none;border-bottom:1px solid var(--gold);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding:50px 0 0;
+    color:var(--muted);
+    font-size:0.85rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Família Kerber · Auckland, NZ</div>
+    <h1>Treino &amp; Nutrição<br><em>Kerber</em></h1>
+    <p class="subtitle">Quatro dias de treino na academia (45 minutos cada) para Peter, Philipp e Lincoln, alimentação econômica com ovos como base proteica, e um dia de pizza no fim de semana.</p>
+    <div class="divider"></div>
+  </header>
+
+  <div class="notice">
+    <strong>Antes de começar:</strong> com Peter e Philipp em obesidade grau III (vindos de uma rotina sedentária) e Lincoln abaixo do peso, vale a pena passar por uma avaliação médica rápida antes de iniciar — principalmente para checar pressão arterial, articulações e coração. Depois disso, este plano foi pensado para começar de forma leve e progredir com segurança.
+  </div>
+
+  <!-- WORKOUT -->
+  <div class="section-head">
+    <span class="num">01</span>
+    <h2>O Plano de Treino</h2>
+    <span class="line"></span>
+  </div>
+  <p class="lead">45 minutos por dia, 4 dias por semana, na academia. A estrutura é a mesma para os três — apenas o <strong>peso e a intensidade</strong> mudam. Peter e Philipp treinam com carga moderada/alta para ganhar músculo e perder gordura; Lincoln treina mais leve e foca em comer o suficiente para ganhar massa muscular.</p>
+
+  <div class="days-grid">
+    <div class="day-card">
+      <div class="day-tag">Dia 1 · Força</div>
+      <h3>Corpo Inteiro A</h3>
+      <ul>
+        <li>5 min de aquecimento: esteira inclinada ou bicicleta, ritmo leve</li>
+        <li>Leg press — 3 séries de 10</li>
+        <li>Supino (máquina ou halteres) — 3 séries de 10</li>
+        <li>Remada sentada no cabo — 3 séries de 10</li>
+        <li>Puxada na polia (pulldown) — 3 séries de 10</li>
+        <li>Prancha — 3 séries de 20–30 seg</li>
+        <li>5 min de alongamento (quadril, peito, ombros)</li>
+      </ul>
+    </div>
+
+    <div class="day-card cardio">
+      <div class="day-tag">Dia 2 · Cardio</div>
+      <h3>Cardio + Core (baixo impacto)</h3>
+      <ul>
+        <li>20–25 min de esteira inclinada ou bicicleta, ritmo de "consegue falar mas não cantar"</li>
+        <li>Dead bug — 3 séries de 10 por lado</li>
+        <li>Bird dog — 3 séries de 10 por lado</li>
+        <li>Prancha lateral — 2 séries de 15–20 seg por lado</li>
+        <li>5 min de alongamento</li>
+      </ul>
+    </div>
+
+    <div class="day-card">
+      <div class="day-tag">Dia 3 · Força</div>
+      <h3>Corpo Inteiro B</h3>
+      <ul>
+        <li>5 min de aquecimento (igual ao Dia 1)</li>
+        <li>Mesa flexora (leg curl) — 3 séries de 10</li>
+        <li>Desenvolvimento de ombro (máquina ou halteres) — 3 séries de 10</li>
+        <li>Puxada assistida ou pulldown pegada larga — 3 séries de 10</li>
+        <li>Elevação de quadril (hip thrust) — 3 séries de 12</li>
+        <li>Abdominal no cabo ou bicicleta — 3 séries de 15</li>
+        <li>5 min de alongamento</li>
+      </ul>
+    </div>
+
+    <div class="day-card cardio">
+      <div class="day-tag">Dia 4 · Cardio</div>
+      <h3>Cardio + Core (baixo impacto)</h3>
+      <ul>
+        <li>20–25 min de esteira ou bicicleta, esforço um pouco maior que no Dia 2 se estiver confortável</li>
+        <li>Rotação no cabo em pé — 3 séries de 10 por lado</li>
+        <li>Marcha com elevação de quadril — 3 séries de 10 por lado</li>
+        <li>Prancha — 3 séries de 20–30 seg</li>
+        <li>5 min de alongamento</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="progress-note">
+    <strong>Regra de progressão:</strong> quando um peso ficar fácil em todas as séries (ou seja, sobrariam 2–3 repetições), aumente um pouco a carga na próxima sessão. Nos dias de cardio, aumente o tempo gradualmente até 30 minutos antes de elevar velocidade ou inclinação.
+  </div>
+
+  <!-- NUTRITION -->
+  <div class="section-head">
+    <span class="num">02</span>
+    <h2>Metas Nutricionais</h2>
+    <span class="line"></span>
+  </div>
+  <p class="lead">Os ovos são a base proteica deste plano — uma das fontes de proteína mais baratas e versáteis (cozidos, mexidos, fritos, em arroz, omeletes, sanduíches).</p>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Peter (18)<br><span style="font-weight:400;font-size:0.82rem;color:var(--muted);">110 kg, 170 cm</span></th>
+        <th>Philipp (20)<br><span style="font-weight:400;font-size:0.82rem;color:var(--muted);">130 kg, 175 cm</span></th>
+        <th>Lincoln (40)<br><span style="font-weight:400;font-size:0.82rem;color:var(--muted);">abaixo do peso</span></th>
+      </tr>
+      <tr>
+        <td>Objetivo</td>
+        <td>Perder gordura + ganhar músculo</td>
+        <td>Perder gordura + ganhar músculo</td>
+        <td>Ganho de peso saudável</td>
+      </tr>
+      <tr>
+        <td>Calorias aprox.</td>
+        <td>~2.300–2.400 kcal</td>
+        <td>~2.500–2.600 kcal</td>
+        <td>~2.800–2.900 kcal</td>
+      </tr>
+      <tr>
+        <td>Proteína</td>
+        <td>~170–190 g</td>
+        <td>~190–210 g</td>
+        <td>~120–140 g</td>
+      </tr>
+      <tr>
+        <td>Abordagem</td>
+        <td>Déficit calórico moderado, com proteína alta para preservar músculo durante a perda de gordura</td>
+        <td>Mesma abordagem, com porções um pouco maiores devido ao peso corporal maior</td>
+        <td>Superávit calórico com proteína suficiente para construir músculo, não apenas ganhar peso</td>
+      </tr>
+    </table>
+  </div>
+
+  <p style="margin-top:18px;font-size:0.92rem;color:var(--muted);">Estes são valores iniciais — depois de 2–3 semanas, se o peso não estiver indo na direção certa (para baixo em Peter e Philipp, para cima em Lincoln), ajuste as calorias em ~150–200 na direção necessária.</p>
+
+  <!-- SAMPLE MENU -->
+  <div class="section-head">
+    <span class="num">03</span>
+    <h2>Cardápio Diário (com Ovos)</h2>
+    <span class="line"></span>
+  </div>
+  <p class="lead">O cardápio base é o mesmo para todos — Peter e Philipp ajustam as <strong>porções dos acompanhamentos com carboidratos</strong> (Philipp com porções um pouco maiores que Peter, devido à meta calórica mais alta), e Lincoln come porções maiores e um lanche extra para atingir o superávit.</p>
+
+  <div class="menu-grid">
+    <div class="meal-card">
+      <h3><span class="dot"></span>Café da Manhã</h3>
+      <p>3–4 ovos inteiros (mexidos, fritos ou cozidos)</p>
+      <p>Aveia cozida com leite ou água</p>
+      <p class="note">Peter e Philipp: porção menor de aveia (½ xícara crua) · Lincoln: porção maior (1 xícara crua) + colher de pasta de amendoim misturada</p>
+    </div>
+
+    <div class="meal-card">
+      <h3><span class="dot"></span>Almoço</h3>
+      <p>Coxa/sobrecoxa de frango (corte mais barato, com pele para Lincoln, sem pele para Peter e Philipp) ou atum em lata</p>
+      <p>Arroz ou batata</p>
+      <p>Legumes congelados (baratos, duram bem, só aquecer)</p>
+      <p>1–2 ovos cozidos como extra de proteína</p>
+    </div>
+
+    <div class="meal-card">
+      <h3><span class="dot"></span>Lanche da Tarde</h3>
+      <p>2 ovos cozidos (cozinhe um lote no início da semana — dura 5–7 dias na geladeira)</p>
+      <p class="note">Peter e Philipp: uma fruta · Lincoln: fruta + punhado de castanhas ou pão extra com pasta de amendoim</p>
+    </div>
+
+    <div class="meal-card">
+      <h3><span class="dot"></span>Jantar</h3>
+      <p>Carne moída, frango ou peixe em lata (a carne moída costuma ser a opção mais barata — pense em refogados simples, bowls de arroz ou macarrão com molho de carne)</p>
+      <p>Arroz, macarrão ou batata</p>
+      <p>Legumes (congelados ou os mais baratos da estação)</p>
+      <p class="note">Peter e Philipp: porção padrão · Lincoln: porção maior + um pouco mais de óleo para calorias extras</p>
+    </div>
+
+    <div class="meal-card" style="grid-column:1/-1;">
+      <h3><span class="dot"></span>Noite <span class="tag">opcional · principalmente para Lincoln</span></h3>
+      <p>Iogurte grego ou leite com uma colher de mel, ou mais 2 ovos cozidos, para ajudar a atingir a meta calórica mais alta.</p>
+    </div>
+  </div>
+
+  <!-- CHEAT DAY -->
+  <div class="section-head">
+    <span class="num">04</span>
+    <h2>Dia Livre (Sábado)</h2>
+    <span class="line"></span>
+  </div>
+
+  <div class="cheat">
+    <span class="pizza-icon">🍕</span>
+    <h2>Sábado = Pizza</h2>
+    <p>O jantar de sábado é pizza, à vontade e sem culpa.</p>
+    <p>Mantenha o café da manhã e o almoço de sábado próximos ao plano normal, para que o jantar de pizza não comprometa o progresso da semana — especialmente importante para Peter e Philipp, que estão em déficit.</p>
+    <p>Lincoln pode considerar a pizza como um bônus dentro do seu superávit semanal, sem necessidade de compensar.</p>
+  </div>
+
+  <!-- SHOPPING + TIPS -->
+  <div class="section-head">
+    <span class="num">05</span>
+    <h2>Lista de Compras &amp; Dicas</h2>
+    <span class="line"></span>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 style="font-size:1.15rem;margin-bottom:14px;color:var(--brick);">Itens Básicos Baratos</h3>
+      <ul class="pill-list">
+        <li>🥚 Ovos (a maior bandeja disponível)</li>
+        <li>🌾 Aveia em flocos (pacote grande)</li>
+        <li>🍚 Arroz (pacote grande)</li>
+        <li>🥔 Batatas</li>
+        <li>🥦 Legumes congelados</li>
+        <li>🍗 Coxa/sobrecoxa de frango</li>
+        <li>🐟 Carne moída ou atum/sardinha em lata</li>
+        <li>🥛 Leite (ou alternativa barata)</li>
+        <li>🥜 Pasta de amendoim</li>
+        <li>🍦 Iogurte grego (se o orçamento permitir)</li>
+        <li>🍞 Pão</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 style="font-size:1.15rem;margin-bottom:14px;color:var(--brick);">Dicas Práticas</h3>
+      <ul class="tips-list">
+        <li>Prepare ovos e arroz/frango em lotes no domingo para agilizar as refeições da semana.</li>
+        <li>Para Peter e Philipp, o maior fator é a consistência nos dias de cardio e não exagerar nos carboidratos do jantar.</li>
+        <li>Para Lincoln, o maior fator é não pular os lanches extras — é fácil comer de menos sem perceber.</li>
+        <li>Pesem-se semanalmente (mesmo dia e horário, ex: sábado de manhã) em vez de diariamente.</li>
+        <li>Se alguém sentir tontura, fadiga excessiva ou dor nas articulações que não passe com descanso, reduza a intensidade e consulte um médico.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SUBSIDY -->
+  <div class="section-head">
+    <span class="num">06</span>
+    <h2>Subsídio para Academia (NZ)</h2>
+    <span class="line"></span>
+  </div>
+
+  <div class="subsidy">
+    <p>A Exercise New Zealand tem um programa nacional de subsídios oferecendo de 40% a 70% de desconto em mais de 350 academias parceiras (iniciativa do setor, não de um órgão governamental direto, mas funciona como tal).</p>
+    <p style="margin-top:14px;"><strong>Elegibilidade:</strong> não ser atualmente membro de uma academia (incluindo testes gratuitos), não ter sido membro nos últimos 12 meses, e nunca ter usado este subsídio antes.</p>
+    <p style="margin-top:14px;"><strong>Como solicitar:</strong></p>
+    <ol>
+      <li>Acesse <a href="https://www.exercise.org.nz/subsidised-gym-memberships-map/" target="_blank">exercise.org.nz/subsidised-gym-memberships-map</a> para encontrar academias parceiras perto de vocês em Auckland.</li>
+      <li>Preencham o formulário curto para garantir o subsídio.</li>
+      <li>Vocês receberão um voucher por e-mail — apresentem na academia e paguem o valor integral no checkout para garantir o desconto.</li>
+    </ol>
+    <p style="margin-top:14px;">Como Peter, Philipp e Lincoln provavelmente seriam novos membros (ou estão retornando), os três podem se inscrever individualmente.</p>
+  </div>
+
+  <footer>
+    Feito com cuidado para a Família Kerber
+  </footer>
+
+</div>
+</body>
+</html>
